@@ -29,7 +29,7 @@ export default (Rule) => {
 
     constructor(props) {
       super(props);
-      
+
       this.dummyFn.isDummyFn = true;
     }
 
@@ -88,6 +88,7 @@ export default (Rule) => {
     render() {
       const isDraggingMe = this.props.dragging.id == this.props.id;
       const fieldConfig = getFieldConfig(this.props.field, this.props.config);
+      const isEven = this.props.path.size % 2;
       const {showErrorMessage} = this.props.config.settings;
       const _isGroup = fieldConfig && fieldConfig.type == "!struct";
       const isInDraggingTempo = !isDraggingMe && this.props.isDraggingTempo;
@@ -98,7 +99,7 @@ export default (Rule) => {
 
       return (
         <div
-          className={classNames("group-or-rule-container", "rule-container", hasError ? "rule-with-error" : null)}
+          className={classNames("group-or-rule-container", "rule-container", hasError ? "rule-with-error" : null, isEven ? "group-or-rule-even" : "group-or-rule-noteven")}
           data-id={this.props.id}
         >
           {[

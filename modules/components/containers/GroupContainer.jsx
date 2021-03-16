@@ -4,6 +4,7 @@ import mapValues from "lodash/mapValues";
 import {pureShouldComponentUpdate} from "../../utils/renderUtils";
 import {connect} from "react-redux";
 import {useOnPropsChanged} from "../../utils/stuff";
+const classNames = require("classnames");
 
 
 export default (Group) => {
@@ -119,7 +120,7 @@ export default (Group) => {
 
       return (
         <div
-          className={"group-or-rule-container group-container"}
+          className={classNames("group-or-rule-container group-container", (currentNesting % 2) ? "group-or-rule-even" : "group-or-rule-noteven")}
           data-id={this.props.id}
         >
           {[

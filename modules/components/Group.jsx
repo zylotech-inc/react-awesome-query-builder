@@ -6,14 +6,12 @@ import Draggable from "./containers/Draggable";
 const classNames = require("classnames");
 import Item from "./Item";
 import {GroupActions} from "./GroupActions";
+import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
 
 const defaultPosition = "topRight";
 const dummyFn = () => {};
 const DragIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray" width="18px" height="18px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-  </svg>
+  <DragIndicatorIcon style={{color: "#989D9F"}}  />
 );
 
 const ConfirmFn = (Cmp) => (
@@ -205,7 +203,7 @@ export class Group extends PureComponent {
     const {config, actions, onDragStart} = props;
     const isRuleGroup = item.get("type") == "group" && item.getIn(["properties", "field"]) != null;
     const type = isRuleGroup ? "rule_group" : item.get("type");
-    
+
     return (
       <Item
         {...this.extraPropsForItem(item)}
@@ -260,8 +258,6 @@ export class Group extends PureComponent {
     const showConjs = conjunctionCount > 1 || showNot;
     if (!showConjs)
       return null;
-    if (!children1.size)
-      return null;
 
     const renderProps = {
       disabled: children1.size < 2,
@@ -283,8 +279,8 @@ export class Group extends PureComponent {
         "group--conjunctions",
         // children1.size < 2 && config.settings.hideConjForOne ? 'hide--conj' : ''
       )}>
-        {this.renderConjs()}
         {this.renderDrag()}
+        {this.renderConjs()}
       </div>
     );
   }
